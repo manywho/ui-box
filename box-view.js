@@ -64,7 +64,7 @@
             return React.DOM.iframe({
                 id: this.props.id,
                 src: viewUrl,
-                style: "width: " + model.width + "px; height: " + model.height + "px; border-radius: 5px; border: 1px solid #d9d9d9;",
+                style: { width: model.width + 'px', height: model.height + 'px', 'border-radius': '5px', border: '1px solid #d9d9d9' },
                 'allowfullscreen': allowfullscreen
             });
 

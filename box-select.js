@@ -127,8 +127,8 @@
                 id: this.props.id,
                 'data-link-type': 'shared',
                 'data-multiselect': model.isMultiSelect,
-                'data-client-id': clientId }, null)
-            );
+                'data-client-id': clientId
+            });
 
         }
 
