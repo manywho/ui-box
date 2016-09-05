@@ -11,6 +11,21 @@
 
 (function (manywho) {
 
+    function getAttribute(attributes, name) {
+
+        // Return the attribute name if it's true in the attributes
+        if (attributes != null &&
+            manywho.utils.isNullOrWhitespace(attributes[name]) == false) {
+
+            if (attributes[name].toLowerCase() == 'true') {
+                return name;
+            }
+        }
+
+        return '';
+
+    }
+
     function getUrlParameter(sharedLink, attributes, name) {
 
         if (attributes != null &&
@@ -57,15 +72,13 @@
 
             // Get the additional customizations out from the attributes
             viewUrl += '?';
-            viewUrl = getUrlParameter(sharedLink, model.attributes, 'theme');
-
-            var allowfullscreen = getUrlParameter(sharedLink, model.attributes, 'allowfullscreen');
+            viewUrl = getUrlParameter(viewUrl, model.attributes, 'theme');
 
             return React.DOM.iframe({
                 id: this.props.id,
                 src: viewUrl,
                 style: { width: model.width + 'px', height: model.height + 'px', 'border-radius': '5px', border: '1px solid #d9d9d9' },
-                'allowfullscreen': allowfullscreen
+                'allowfullscreen': getAttribute(model.attributes, 'allowfullscreen')
             });
 
         }

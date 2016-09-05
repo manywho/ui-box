@@ -36,14 +36,6 @@
                         {
                             "developerName": "Name",
                             "contentValue": response[i].name
-                        },
-                        {
-                            "developerName": "Download Uri",
-                            "contentValue": response[i].url
-                        },
-                        {
-                            "developerName": "Size",
-                            "contentValue": response[i].size
                         }
                     ]
                 });
@@ -62,25 +54,28 @@
 
             boxSelect = new BoxSelect();
 
+            var id = this.props.id;
+            var flowKey = this.props.flowKey;
+
             // Register a success callback handler
             boxSelect.success(function(response) {
 
-                var model = manywho.model.getComponent(this.props.id, this.props.flowKey);
+                var model = manywho.model.getComponent(id, flowKey);
                 model.objectData = null;
 
-                manywho.state.setComponent(this.props.id, { objectData: convertResponseToBoxFiles(response) }, this.props.flowKey, true);
-                manywho.component.handleEvent(this, model, this.props.flowKey);
+                manywho.state.setComponent(id, { objectData: convertResponseToBoxFiles(response) }, flowKey, true);
+                manywho.component.handleEvent(this, model, flowKey);
 
             });
 
             // Register a cancel callback handler
             boxSelect.cancel(function() {
 
-                var model = manywho.model.getComponent(this.props.id, this.props.flowKey);
+                var model = manywho.model.getComponent(id, flowKey);
                 model.objectData = null;
 
-                manywho.state.setComponent(this.props.id, { objectData: null }, this.props.flowKey, true);
-                manywho.component.handleEvent(this, model, this.props.flowKey);
+                manywho.state.setComponent(id, { objectData: null }, flowKey, true);
+                manywho.component.handleEvent(this, model, flowKey);
 
             });
 
@@ -123,12 +118,12 @@
 
             }
 
-            return React.DOM.div({
-                id: this.props.id,
+            return React.DOM.div({ id: this.props.id }, [ React.DOM.div({
+                id: 'box-select',
                 'data-link-type': 'shared',
                 'data-multiselect': model.isMultiSelect,
                 'data-client-id': clientId
-            });
+            }) ]);
 
         }
 
